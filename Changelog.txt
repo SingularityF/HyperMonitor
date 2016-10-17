@@ -1,2 +1,5 @@
 version 1.1:
 1. Added a new feature to bring the target window forward or send it backward.
+
+version 1.1.1:
+1. When the application being monitored it brought to the front, Hyper Monitor no longer sets itself to the foreground window, which may make the bring-to-front action fail.
