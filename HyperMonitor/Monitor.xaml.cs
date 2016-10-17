@@ -77,6 +77,13 @@ namespace HyperMonitor
         public static readonly int WINEVENT_OUTOFCONTEXT = 0x0000;
         public static readonly int WINEVENT_SKIPOWNPROCESS = 0x0002;
         public static readonly int WM_HOTKEY = 0x0312;
+        public static readonly int SWP_NOMOVE = 0x0002;
+        public static readonly int SWP_NOSIZE = 0x0001;
+        public static readonly int SWP_SHOWWINDOW = 0x0040;
+        public static readonly int SWP_NOACTIVATE = 0x0010;
+        public static readonly IntPtr HWND_BOTTOM = new IntPtr(1);
+        public static readonly IntPtr HWND_TOP = new IntPtr(0);
+
 
         [StructLayout(LayoutKind.Sequential)]
         public struct Point
@@ -100,6 +107,11 @@ namespace HyperMonitor
         public static extern bool UnregisterHotKey(IntPtr hWnd, int id);
         [DllImport("user32.dll")]
         static extern int GetWindowText(IntPtr hWnd, StringBuilder text, int count);
+        [DllImport("user32.dll")]
+        static extern bool SetForegroundWindow(IntPtr hWnd);
+        [DllImport("user32.dll")]
+        static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy, int uFlags);
+
 
 
         // <-- END WIN API
@@ -115,6 +127,8 @@ namespace HyperMonitor
         IntPtr eventhook;
         public enum ACT { AUTO, MANUAL };
         public int hotkeyid = 0;
+        bool isslave = false;
+        bool targetWndForward = false;
 
 
 
@@ -129,6 +143,7 @@ namespace HyperMonitor
             path = args[0];
             if (args.Length > 1)
             {
+                isslave = true;
                 ControlPanel.Visibility = Visibility.Hidden;
                 Background = Brushes.Black;
                 WindowStyle = WindowStyle.None;
@@ -141,7 +156,8 @@ namespace HyperMonitor
                 cropArea.Bottom = int.Parse(args[5]);
                 Width = width + 6;
                 Height = height + 6;
-                SetupMonitor(new IntPtr(int.Parse(args[1], System.Globalization.NumberStyles.AllowHexSpecifier)));
+                lasthWnd = new IntPtr(int.Parse(args[1], System.Globalization.NumberStyles.AllowHexSpecifier));
+                SetupMonitor(lasthWnd);
                 NoiseTile.Visibility = Visibility.Visible;
                 ctrlBar = new ControlBar();
                 ctrlBar.Owner = this;
@@ -310,6 +326,36 @@ namespace HyperMonitor
         {
             UnhookWinEvent(eventhook);
             UnregisterHotKey(new WindowInteropHelper(this).Handle, hotkeyid);
+        }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (isslave && e.Key == Key.Tab)
+            {
+                if (!targetWndForward)
+                {
+                    BringForward();
+                }
+                else
+                {
+                    SendBackward();
+                }
+            }
+        }
+        public void BringForward()
+        {
+            SetForegroundWindow(lasthWnd);
+            SetForegroundWindow(new WindowInteropHelper(this).Handle);
+            targetWndForward = true;
+            ctrlBar.SendBackwardBtn.Visibility = Visibility.Visible;
+            ctrlBar.BringForwardBtn.Visibility = Visibility.Collapsed;
+        }
+        public void SendBackward()
+        {
+            SetWindowPos(lasthWnd, HWND_BOTTOM, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
+            targetWndForward = false;
+            ctrlBar.SendBackwardBtn.Visibility = Visibility.Collapsed;
+            ctrlBar.BringForwardBtn.Visibility = Visibility.Visible;
         }
     }
 }

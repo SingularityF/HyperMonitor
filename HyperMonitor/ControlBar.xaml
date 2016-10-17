@@ -38,6 +38,18 @@
                     <ToolTip Content="Restore scale"/>
                 </ToolTipService.ToolTip>
             </Button>
+            <Button x:Name="BringForwardBtn" Height="35" Width="35" Margin="0,5,0,0" Click="BringForward" Background="{x:Null}" BorderBrush="{x:Null}">
+                <Image Source="Resources/BringForwardIcon.png"/>
+                <ToolTipService.ToolTip>
+                    <ToolTip Content="Bring window forward"/>
+                </ToolTipService.ToolTip>
+            </Button>
+            <Button Visibility="Collapsed" x:Name="SendBackwardBtn" Height="35" Width="35" Margin="0,5,0,0" Click="SendBackward" Background="{x:Null}" BorderBrush="{x:Null}">
+                <Image Source="Resources/SendBackwardIcon.png"/>
+                <ToolTipService.ToolTip>
+                    <ToolTip Content="Send window backward"/>
+                </ToolTipService.ToolTip>
+            </Button>
         </StackPanel>
         <Label x:Name="ScaleIndicator" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Bottom" Content="100%" Foreground="White">
             <ToolTipService.ToolTip>

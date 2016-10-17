@@ -63,6 +63,16 @@ namespace HyperMonitor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap BringForwardIcon {
+            get {
+                object obj = ResourceManager.GetObject("BringForwardIcon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap CloseIcon {
             get {
                 object obj = ResourceManager.GetObject("CloseIcon", resourceCulture);
@@ -106,6 +116,16 @@ namespace HyperMonitor.Properties {
         internal static System.Drawing.Bitmap ScaleUpIcon {
             get {
                 object obj = ResourceManager.GetObject("ScaleUpIcon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SendBackwardIcon {
+            get {
+                object obj = ResourceManager.GetObject("SendBackwardIcon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

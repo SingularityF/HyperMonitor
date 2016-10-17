@@ -22,7 +22,7 @@ namespace HyperMonitor
     {
         Monitor parentWnd;
         int barWidth = 45;
-        int barHeight = 250;
+        int barHeight = 300;
         public double scale = 1;
         DispatcherTimer timer = new DispatcherTimer();
 
@@ -117,6 +117,16 @@ namespace HyperMonitor
         public void UpdateScaleIndicator()
         {
             ScaleIndicator.Content = ((int)(scale * 100)).ToString() + "%";
+        }
+
+        private void BringForward(object sender, RoutedEventArgs e)
+        {
+            parentWnd.BringForward();
+        }
+
+        private void SendBackward(object sender, RoutedEventArgs e)
+        {
+            parentWnd.SendBackward();
         }
     }
 }
