@@ -352,6 +352,7 @@ namespace HyperMonitor
         public void SendBackward()
         {
             SetWindowPos(lasthWnd, HWND_BOTTOM, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
+            SetForegroundWindow(new WindowInteropHelper(this).Handle);
             targetWndForward = false;
             ctrlBar.SendBackwardBtn.Visibility = Visibility.Collapsed;
             ctrlBar.BringForwardBtn.Visibility = Visibility.Visible;

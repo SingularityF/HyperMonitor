@@ -3,3 +3,6 @@ version 1.1:
 
 version 1.1.1:
 1. When the application being monitored it brought to the front, Hyper Monitor no longer sets itself to the foreground window, which may make the bring-to-front action fail.
+
+version 1.1.2:
+1. Fixed a bug that when the target window is sent back by pressing the send back button and then the control bar loses focus, the target window is automatically brought forward.
