@@ -270,17 +270,17 @@ namespace HyperMonitor
             return false;
         }
 
-        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.ChangedButton == MouseButton.Left)
-            {
-                this.DragMove();
-            }
-            else
-            {
-                WindowState = WindowState.Minimized;
-            }
-        }
+        //private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        //{
+        //    if (e.ChangedButton == MouseButton.Left)
+        //    {
+        //        this.DragMove();
+        //    }
+        //    else
+        //    {
+        //        WindowState = WindowState.Minimized;
+        //    }
+        //}
 
         private void Window_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -356,6 +356,17 @@ namespace HyperMonitor
             targetWndForward = false;
             ctrlBar.SendBackwardBtn.Visibility = Visibility.Collapsed;
             ctrlBar.BringForwardBtn.Visibility = Visibility.Visible;
+        }
+
+        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            this.DragMove();
+            e.Handled = true;
+        }
+
+        private void Window_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
         }
     }
 }

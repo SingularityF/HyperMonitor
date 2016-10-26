@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HyperMonitor"
         mc:Ignorable="d"
-        Title="Hyper Monitor" Height="200" Width="500" Loaded="Window_Loaded" Topmost="True" MouseDown="Window_MouseDown" MouseDoubleClick="Window_MouseDoubleClick" PreviewMouseWheel="Window_PreviewMouseWheel" WindowStartupLocation="CenterScreen" Icon="HyperMonitorLogo.ico" Closing="Window_Closing" KeyDown="Window_KeyDown">
+        Title="Hyper Monitor" Height="200" Width="500" Loaded="Window_Loaded" Topmost="True" MouseDoubleClick="Window_MouseDoubleClick" PreviewMouseWheel="Window_PreviewMouseWheel" WindowStartupLocation="CenterScreen" Icon="HyperMonitorLogo.ico" Closing="Window_Closing" KeyDown="Window_KeyDown" MouseLeftButtonDown="Window_MouseLeftButtonDown" MouseRightButtonDown="Window_MouseRightButtonDown">
 
     <Grid>
         <StackPanel x:Name="ControlPanel">
